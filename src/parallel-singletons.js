@@ -3,8 +3,8 @@ import {SingletonFactory} from 'singletons';
 
 export const ParallelSingletonFactory = function (Type,
   defaultKeyfunc = obj => obj.toString()) {
-  return (function (List, BaseSingleton) {
-    const Singleton = SingletonFactory(List, ['array']);
+  return (function (ListType, BaseSingleton) {
+    const Singleton = SingletonFactory(ListType, ['array']);
 
     return function (array) {
       return Singleton(array.map(args => BaseSingleton(...args)));
