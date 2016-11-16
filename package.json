@@ -42,7 +42,7 @@
     "plumb-gulp": "^0.1.0"
   },
   "dependencies": {
-    "one-go": "^0.2.0",
+    "one-go": "^0.2.1",
     "singletons": "^0.4.0"
   }
 }
