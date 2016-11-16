@@ -1,6 +1,9 @@
 import OneGo from 'one-go';
 import {SingletonFactory} from 'singletons';
 
+const _ListType = Symbol();
+const _BaseSingleton = Symbol();
+
 export const ParallelSingletonFactory = function (Type,
   defaultKeyfunc = obj => obj.toString()) {
   const ListType = OneGo(Type, {arrayInit: true});
@@ -13,6 +16,15 @@ export const ParallelSingletonFactory = function (Type,
       return Singleton(array.map(args => BaseSingleton(...args)));
     };
   }(ListType, BaseSingleton));
+
+  Object.assign(ParallelSingleton, {
+    [_ListType]: ListType,
+    [_BaseSingleton]: BaseSingleton,
+
+    get(...args) {
+      return BaseSingleton.get(...args);
+    }
+  });
 
   return ParallelSingleton;
 };
