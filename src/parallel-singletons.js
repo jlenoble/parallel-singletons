@@ -9,6 +9,22 @@ export const ParallelSingletonFactory = function (Type,
   const ListType = OneGo(Type, {arrayInit: true});
   const BaseSingleton = SingletonFactory(Type, defaultKeyfunc);
 
+  Object.assign(ListType.prototype, {
+    [_BaseSingleton]: BaseSingleton,
+
+    get (...args) {
+      let foundElt;
+      this.elements.some(elt => {
+        if (elt === this[_BaseSingleton].get(...args)) {
+          foundElt = elt;
+          return true;
+        }
+        return false;
+      });
+      return foundElt;
+    },
+  });
+
   const ParallelSingleton = (function (ListType, BaseSingleton) {
     const Singleton = SingletonFactory(ListType, ['array']);
 
@@ -21,9 +37,9 @@ export const ParallelSingletonFactory = function (Type,
     [_ListType]: ListType,
     [_BaseSingleton]: BaseSingleton,
 
-    get(...args) {
+    get (...args) {
       return this[_BaseSingleton].get(...args);
-    }
+    },
   });
 
   return ParallelSingleton;
