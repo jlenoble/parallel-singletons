@@ -43,6 +43,6 @@
   },
   "dependencies": {
     "one-go": "^0.2.0",
-    "singletons": "^0.3.0"
+    "singletons": "^0.4.0"
   }
 }
