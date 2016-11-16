@@ -1,6 +1,6 @@
 {
   "name": "parallel-singletons",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Handle a set of similar singletons in one go",
   "main": "lib/parallel-singletons.js",
   "scripts": {
