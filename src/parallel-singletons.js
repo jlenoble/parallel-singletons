@@ -3,12 +3,16 @@ import {SingletonFactory} from 'singletons';
 
 export const ParallelSingletonFactory = function (Type,
   defaultKeyfunc = obj => obj.toString()) {
-  return (function (ListType, BaseSingleton) {
+  const ListType = OneGo(Type, {arrayInit: true});
+  const BaseSingleton = SingletonFactory(Type, defaultKeyfunc);
+
+  const ParallelSingleton = (function (ListType, BaseSingleton) {
     const Singleton = SingletonFactory(ListType, ['array']);
 
     return function (array) {
       return Singleton(array.map(args => BaseSingleton(...args)));
     };
-  }(OneGo(Type, {arrayInit: true}),
-    SingletonFactory(Type, defaultKeyfunc)));
+  }(ListType, BaseSingleton));
+
+  return ParallelSingleton;
 };
