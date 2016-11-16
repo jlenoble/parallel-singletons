@@ -22,7 +22,7 @@ export const ParallelSingletonFactory = function (Type,
     [_BaseSingleton]: BaseSingleton,
 
     get(...args) {
-      return BaseSingleton.get(...args);
+      return this[_BaseSingleton].get(...args);
     }
   });
 
