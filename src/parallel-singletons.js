@@ -29,7 +29,12 @@ export const ParallelSingletonFactory = function (Type,
     const Singleton = SingletonFactory(ListType, ['array']);
 
     return function (array) {
-      return Singleton(array.map(args => BaseSingleton(...args)));
+      return Singleton(array.map(args => {
+        if (Array.isArray(args)) {
+          return BaseSingleton(...args);
+        }
+        return BaseSingleton(args);
+      }));
     };
   }(ListType, BaseSingleton));
 
