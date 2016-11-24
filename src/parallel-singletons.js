@@ -40,6 +40,9 @@ export const ParallelSingletonFactory = function (Type,
     get (...args) {
       return this[_BaseSingleton].get(...args);
     },
+    getBaseSingleton () {
+      return this[_BaseSingleton];
+    },
   });
 
   return ParallelSingleton;
